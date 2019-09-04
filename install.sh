@@ -6,6 +6,8 @@ read domain
 echo Setup with fresh install for $domain
 echo What is your password for isp config / mysql / webmail ?
 read password
-ip="$(ifconfig | grep -A 1 'eth0' | tail -1 | cut -d ':' -f 2 | cut -d ' ' -f 1)"
-echo your ip is $ip
+ip4=$(/sbin/ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)
+ip6=$(/sbin/ip -o -6 addr list eth0 | awk '{print $4}' | cut -d/ -f1)
+
+echo your ip is $ip4
 
